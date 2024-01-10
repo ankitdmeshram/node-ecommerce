@@ -3,42 +3,47 @@ const { createHmac } = require("node:crypto");
 // const crypto = require("crypto");
 const { v4: uuidv4 } = require("uuid");
 
-const userSchema = new mongoose.Schema({
-  name: {
-    type: String,
-    required: true,
-    maxlength: 32,
-    trim: true,
+const userSchema = new mongoose.Schema(
+  {
+    name: {
+      type: String,
+      required: true,
+      maxlength: 32,
+      trim: true,
+    },
+    lastName: {
+      type: String,
+      maxlength: 32,
+      trim: 32,
+    },
+    email: {
+      type: String,
+      trim: true,
+      required: true,
+      unique: true,
+    },
+    userInfo: {
+      type: String,
+      trim: true,
+    },
+    password: {
+      type: String,
+      requred: true,
+    },
+    salt: String,
+    role: {
+      type: Number,
+      default: 0,
+    },
+    purchases: {
+      type: Array,
+      default: [],
+    },
   },
-  lastName: {
-    type: String,
-    maxlength: 32,
-    trim: 32,
-  },
-  email: {
-    type: String,
-    trim: true,
-    required: true,
-    unique: true,
-  },
-  userInfo: {
-    type: String,
-    trim: true,
-  },
-  password: {
-    type: String,
-    requred: true,
-  },
-  salt: String,
-  role: {
-    type: Number,
-    default: 0,
-  },
-  purchases: {
-    type: Array,
-    default: [],
-  },
-});
+  {
+    timestamps: true,
+  }
+);
 
 userSchema
   .virtual("pass")
