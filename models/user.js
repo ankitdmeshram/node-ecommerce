@@ -36,3 +36,5 @@ const userSchema = new mongoose.Schema({
     default: [],
   },
 });
+
+module.exports = mongoose.model("User", userSchema);
